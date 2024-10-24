@@ -5,4 +5,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Home')->name('home');
 
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
+require __DIR__ . "/auth.php";
