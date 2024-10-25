@@ -1,47 +1,41 @@
 <script setup>
 import Container from "../../Components/Container.vue";
 import Title from "../../Components/title.vue";
-import TextLink from "../../Components/TextLink.vue";
 import InputField from "../../Components/InputField.vue";
 import PrimaryBtn from "../../Components/PrimaryBtn.vue";
 import ErrorMessages from "../../Components/ErrorMessages.vue";
 import { useForm } from "@inertiajs/vue3";
 
+const props = defineProps({
+    token: String,
+    email: String,
+});
+
 const form = useForm({
-    name: "",
-    email: "",
+    token: props.token,
+    email: props.email,
     password: "",
     password_confirmation: "",
 });
 
 const submit = () => {
-    form.post(route("register"), {
+    form.post(route("password.update"), {
         onFinish: () => form.reset("password", "password_confirmation"),
     });
 };
 </script>
 
 <template>
-    <Head title="- Register" />
+    <Head title="- Reset Password" />
     <Container class="w-1/2">
         <div class="mb-8 text-center">
-            <Title>Register a new account</Title>
-            <p>
-                Already have an account?
-                <TextLink routeName="login" label="Login" />
-            </p>
+            <Title>Enter your new password</Title>
         </div>
 
         <!-- Errors messages -->
         <ErrorMessages :errors="form.errors" />
 
         <form @submit.prevent="submit" class="space-y-6">
-            <InputField
-                label="Name"
-                type="text"
-                icon="id-badge"
-                v-model="form.name"
-            />
             <InputField
                 label="Email"
                 type="email"
@@ -61,11 +55,7 @@ const submit = () => {
                 v-model="form.password_confirmation"
             />
 
-            <p class="text-slate-500 text-sm dark:text-slate-400">
-                By creating an account, you agree to our Terms of Service and
-                Privacy Policy.
-            </p>
-            <PrimaryBtn :disabled="form.processing">Register</PrimaryBtn>
+            <PrimaryBtn :disabled="form.processing">Reset Password</PrimaryBtn>
         </form>
     </Container>
 </template>
