@@ -3,7 +3,7 @@ const model = defineModel();
 defineProps({
     label: String,
     icon: String,
-    Placeholder: {
+    placeholder: {
         type: String,
         default: "",
     },
