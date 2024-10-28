@@ -12,7 +12,7 @@ import { useForm } from "@inertiajs/vue3";
 const form = useForm({
     email: "",
     password: "",
-    remember: null,
+    remember: "",
 });
 
 defineProps({

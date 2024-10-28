@@ -12,7 +12,7 @@ class Listing extends Model
     protected $fillable = [
         'title',
         'desc',
-        'tag',
+        'tags',
         'email',
         'link',
         'image',
@@ -30,9 +30,18 @@ class Listing extends Model
         // dd($filters);
         if ($filters['search'] ?? false) {
             // dd($filters);
-            $query
-                ->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('desc', 'like', '%' . request('search') . '%');
+            $query->where(function ($q) {
+                $q->where('title', 'like', '%' . request('search') . '%')
+                    ->orWhere('desc', 'like', '%' . request('search') . '%');
+            });
+        }
+
+        if ($filters['user_id'] ?? false) {
+            $query->where('user_id', request('user_id'));
+        }
+
+        if ($filters['tag'] ?? false) {
+            $query->where('tags', 'like', '%' . request('tag') . '%');
         }
     }
 }
