@@ -32,7 +32,14 @@ defineProps({
                     </p>
 
                     <!-- Edit and delete buttons -->
-                    <div>Edit and Delete</div>
+                    <div class="pl-4 flex items-center gap-4">
+                        <Link
+                            :href="route('listing.edit', listing.id)"
+                            class="bg-green-500 rounded-md text-white px-6 py-2 hover:outline outline-green-500 outline-offset-2"
+                        >
+                            Edit
+                        </Link>
+                    </div>
                 </div>
 
                 <h3 class="font-bold text-2xl mb-4">{{ listing.title }}</h3>
