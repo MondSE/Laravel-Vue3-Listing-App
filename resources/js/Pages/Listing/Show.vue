@@ -1,10 +1,18 @@
 <script setup>
 import Container from "../../Components/Container.vue";
+import { router } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     listing: Object,
     user: Object,
+    canModify: Boolean,
 });
+
+const deleteListing = () => {
+    if (confirm("Are you sure?")) {
+        router.delete(route("listing.destroy", props.listing.id));
+    }
+};
 </script>
 
 <template>
@@ -32,13 +40,21 @@ defineProps({
                     </p>
 
                     <!-- Edit and delete buttons -->
-                    <div class="pl-4 flex items-center gap-4">
+                    <div v-if="canModify" class="pl-4 flex items-center gap-4">
                         <Link
                             :href="route('listing.edit', listing.id)"
                             class="bg-green-500 rounded-md text-white px-6 py-2 hover:outline outline-green-500 outline-offset-2"
                         >
                             Edit
                         </Link>
+
+                        <button
+                            @click="deleteListing"
+                            class="bg-red-500 rounded-md text-white px-6 py-2 hover:outline outline-red-500 outline-offset-2"
+                            type="button"
+                        >
+                            Delete
+                        </button>
                     </div>
                 </div>
 
