@@ -20,3 +20,7 @@ Plugin supported
 -   Tailwind Css
 -   Ziggy
 -   lodash
+
+if you want to pull this you will add a file after pulling 
+-   add two folder imagee inside listing folder like this -> storage\app\public\images\listing\
+-   add any .png picture you like and change it's name default.png put it inside the listing folder
